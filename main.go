@@ -9,10 +9,11 @@ import (
 // TODO - dockerize the project itself
 // TODO - add postgres driver
 // TODO - add jwt
-// TODO - add rich error
-// TODO - add validator
-// TODO - add config
 // TODO - add migrator
+
+// TODO - add validator
+// TODO - add rich error
+// TODO - add config loader
 
 func main() {
 	httpserver.Serve()

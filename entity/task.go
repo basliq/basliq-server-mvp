@@ -7,6 +7,7 @@ type Task struct {
 	Title             string
 	Description       string
 	Assignee          User
+	Creator           User
 	Subtasks          []Task
 	DateOpened        time.Time
 	DateClosed        time.Time
