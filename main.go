@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
-	httpserver "github.com/basliq/basliq-server-mvp/server/http"
+	"github.com/basliq/basliq-server-mvp/config"
+	"github.com/basliq/basliq-server-mvp/server/http"
 )
 
-// TODO - setup docker for postgres service
 // TODO - dockerize the project itself
 // TODO - add postgres driver
 // TODO - add jwt
@@ -13,9 +12,12 @@ import (
 
 // TODO - add validator
 // TODO - add rich error
-// TODO - add config loader
 
 func main() {
-	httpserver.Serve()
-	fmt.Println("Hello from backend guys!")
+	appConfig := config.Config{
+		Server: config.ServerConfig{Port: ":8080"},
+	}
+
+	server := http.New(appConfig)
+	server.Serve()
 }
