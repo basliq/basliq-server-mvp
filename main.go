@@ -2,7 +2,9 @@ package main
 
 import (
 	"github.com/basliq/basliq-server-mvp/config"
+	"github.com/basliq/basliq-server-mvp/repository"
 	"github.com/basliq/basliq-server-mvp/server/http"
+	"github.com/basliq/basliq-server-mvp/service/user"
 )
 
 // TODO - dockerize the project itself
@@ -18,6 +20,16 @@ func main() {
 		Server: config.ServerConfig{Port: ":8080"},
 	}
 
-	server := http.New(appConfig)
+	repo := repository.New(repository.Config{
+		Username: "db-user",
+		Password: "password",
+		Port:     5432,
+		Host:     "localhost",
+		DBName:   "basliq",
+	})
+
+	userSvc := user.New(repo)
+
+	server := http.New(appConfig, userSvc)
 	server.Serve()
 }

@@ -1,11 +1,8 @@
 package entity
 
 type User struct {
-	Id           uint
-	Firstname    string
-	Lastname     string
-	Email        string
-	Username     string
-	ProfileImage string
-	Bio          string
+	Id       uint
+	Email    string
+	Username string
+	Password string
 }

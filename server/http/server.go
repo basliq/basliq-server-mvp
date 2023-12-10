@@ -12,8 +12,8 @@ type Server struct {
 	userSvc user.Service
 }
 
-func New(config config.Config) Server {
-	return Server{config: config}
+func New(config config.Config, userSvc user.Service) Server {
+	return Server{config: config, userSvc: userSvc}
 }
 
 func (s Server) Serve() {

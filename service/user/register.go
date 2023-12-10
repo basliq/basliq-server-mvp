@@ -13,5 +13,15 @@ type RegisterRes struct {
 }
 
 func (s Service) Register(req RegisterReq) (RegisterRes, error) {
-	return RegisterRes{}, nil
+	createdUser, err := s.repo.CreateUser(entity.User{
+		Email:    req.Email,
+		Username: req.Username,
+		Password: req.Password,
+	})
+
+	if err != nil {
+		return RegisterRes{}, err
+	}
+
+	return RegisterRes{User: createdUser}, nil
 }
