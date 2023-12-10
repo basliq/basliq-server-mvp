@@ -12,9 +12,6 @@ type RegisterRes struct {
 	User entity.User
 }
 
-// TODO
-// hash passwords
-
 func (s Service) Register(req RegisterReq) (RegisterRes, error) {
 	return RegisterRes{}, nil
 }
