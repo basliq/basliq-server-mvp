@@ -8,7 +8,7 @@ import (
 )
 
 // TODO - dockerize the project itself
-// TODO - add postgres driver
+// TODO - add postgres drEiver
 // TODO - add jwt
 // TODO - add migrator
 
@@ -27,6 +27,8 @@ func main() {
 		Host:     "localhost",
 		DBName:   "basliq",
 	})
+
+	repo.Ping()
 
 	userSvc := user.New(repo)
 

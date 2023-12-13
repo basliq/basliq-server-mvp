@@ -3,9 +3,9 @@ package user
 import "github.com/basliq/basliq-server-mvp/entity"
 
 type RegisterReq struct {
-	Username string
-	Email    string
-	Password string
+	Username string `json:"username"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }
 
 type RegisterRes struct {
