@@ -1,6 +1,7 @@
 package http
 
 import (
+	"fmt"
 	"github.com/basliq/basliq-server-mvp/service/user"
 	"github.com/labstack/echo/v4"
 	"net/http"
@@ -8,10 +9,10 @@ import (
 
 func (s Server) registerUser(c echo.Context) error {
 	var req user.RegisterReq
-	if err := c.Bind(req); err != nil {
+	if err := c.Bind(&req); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
 	}
-
+	fmt.Println(req)
 	res, err := s.userSvc.Register(req)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)

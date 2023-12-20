@@ -17,19 +17,28 @@ type Config struct {
 
 type DB struct {
 	config Config
-	db     *pgxpool.Pool
+	pool   *pgxpool.Pool
 }
 
 func New(config Config) *DB {
-	db, err := pgxpool.New(context.Background(), fmt.Sprintf("postgresql://%s:%s@%s:%s/%s", config.Username, config.Password, config.Host, config.Port, config.DBName))
+	pool, err := pgxpool.New(context.Background(), fmt.Sprintf("postgresql://%s:%s@%s:%d/%s", config.Username, config.Password, config.Host, config.Port, config.DBName))
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to create connection pool: %v\n", err)
 		os.Exit(1)
 	}
-	defer db.Close()
+	// TODO - where to put the close?
+	// defer pool.Close(context.Background())
 
+	fmt.Println("connected to database:", &pool)
 	return &DB{
 		config: config,
-		db:     db,
+		pool:   pool,
+	}
+}
+
+func (db DB) Ping() {
+	err := db.pool.Ping(context.Background())
+	if err != nil {
+		fmt.Println("there is no connection:", err)
 	}
 }
