@@ -1,6 +1,9 @@
 package user
 
-import "github.com/basliq/basliq-server-mvp/entity"
+import (
+	"github.com/basliq/basliq-server-mvp/entity"
+	"github.com/basliq/basliq-server-mvp/repository"
+)
 
 type RegisterReq struct {
 	Username string `json:"username"`
@@ -9,7 +12,7 @@ type RegisterReq struct {
 }
 
 type RegisterRes struct {
-	User entity.User
+	User repository.CreatedUser
 }
 
 func (s Service) Register(req RegisterReq) (RegisterRes, error) {

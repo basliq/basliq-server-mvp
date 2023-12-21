@@ -6,14 +6,25 @@ import (
 	"github.com/basliq/basliq-server-mvp/entity"
 )
 
-func (db DB) CreateUser(user entity.User) (entity.User, error) {
-	userQueryRes := entity.User{}
-	err := db.pool.QueryRow(context.Background(), `INSERT INTO users(email, username, password) VALUES($1, $2, $3);`, user.Email, user.Username, user.Password).Scan(&userQueryRes)
+type CreatedUser struct {
+	Id       uint
+	Email    string
+	Username string
+}
+
+func (db DB) CreateUser(user entity.User) (CreatedUser, error) {
+	var userId uint = 0
+	err := db.pool.QueryRow(context.Background(), `INSERT INTO users(email, username, password)
+													   VALUES($1, $2, $3) RETURNING user_id;`, user.Email, user.Username, user.Password).Scan(&userId)
 
 	if err != nil {
 		fmt.Println(err)
-		return entity.User{}, err
+		return CreatedUser{}, err
 	}
 
-	return userQueryRes, nil
+	return CreatedUser{
+		Id:       userId,
+		Email:    user.Email,
+		Username: user.Username,
+	}, nil
 }

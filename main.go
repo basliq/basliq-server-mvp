@@ -28,8 +28,6 @@ func main() {
 		DBName:   "basliq",
 	})
 
-	repo.Ping()
-
 	userSvc := user.New(repo)
 
 	server := http.New(appConfig, userSvc)
