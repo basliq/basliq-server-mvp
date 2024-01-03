@@ -1,15 +1,13 @@
 package user
 
 import (
+	"github.com/basliq/basliq-server-mvp/dto"
 	"github.com/basliq/basliq-server-mvp/entity"
-	"github.com/basliq/basliq-server-mvp/repository"
 )
 
 type Repository interface {
-	//IsUsernameUnique(username string) (bool, error)
-	//IsEmailUnique(email string) (bool, error)
-	//IsUsernameAndEmailUnique(email, username string) (bool, error)
-	CreateUser(user entity.User) (repository.CreatedUser, error)
+	CreateUser(user entity.User) (dto.Profile, error)
+	FindUserByEmail(email string) (dto.Profile, error)
 }
 
 type Service struct {

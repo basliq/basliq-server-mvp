@@ -1,13 +1,12 @@
 package user
 
-type LoginReq struct {
-	Username string
-	Password string
-}
+import "github.com/basliq/basliq-server-mvp/dto"
 
-type LoginRes struct {
-}
+func (s Service) Login(req dto.LoginReq) (dto.LoginRes, error) {
+	user, err := s.repo.FindUserByEmail(req.Email)
+	if err != nil {
+		return dto.LoginRes{}, err
+	}
 
-func (s Service) Login(req LoginReq) (LoginRes, error) {
-	return LoginRes{}, nil
+	return dto.LoginRes{Profile: user}, nil
 }
