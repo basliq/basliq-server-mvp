@@ -23,8 +23,8 @@ func (s Server) Serve() {
 
 	e.GET("/healthcheck", healthCheck)
 
-	userGroup := e.Group("/user")
-	userGroup.POST("/register", s.registerUser)
+	userGroup := e.Group("/account")
+	userGroup.POST("/signup", s.registerUser)
 
 	e.Logger.Fatal(e.Start(s.config.Server.Port))
 }

@@ -8,7 +8,7 @@ import (
 )
 
 // TODO - dockerize the project itself
-// TODO - add postgres drEiver
+// TODO - add postgres driver
 // TODO - add jwt
 // TODO - add migrator
 
